@@ -7,22 +7,15 @@ def Main():
     port = 5000
      
     mySocket = socket.socket()
-    mySocket.bind((host,port))
-     
-    mySocket.listen(1)
-    conn, addr = mySocket.accept()
-    print ("Connection from: " + str(addr))
+    #client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    mySocket.connect((host, port))
+    print ("Connected to: " + str(host))
+    msg = "Hellou!"
     while True:
-            data = conn.recv(1024).decode()
-            if not data:
-                    break
-            print ("from connected  user: " + str(data))
-             
-            data = str(data).upper()
-            print ("sending: " + str(data))
-            conn.send(data.encode())
-             
-    conn.close()
+            count = mySocket.send(msg.encode())
+            print ("N. bytes sent: " + str(count))
+            print(mySocket.recv(1024).decode())         
+    mySocket.close()
      
 if __name__ == '__main__':
     Main()

@@ -12,11 +12,13 @@ def Main():
     mySocket.listen(1)
     conn, addr = mySocket.accept()
     print ("Connection from: " + str(addr))
+    i = 0
     while True:
             data = conn.recv(1024).decode()
             if not data:
                     break
-            print ("from connected  user: " + str(data))
+            i += 1
+            print ("Message ", i ," from connected  user: " + str(data))
              
             data = str(data).upper()
             print ("sending: " + str(data))
